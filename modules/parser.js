@@ -5,6 +5,7 @@ module.exports.parse = (fileName) => {
   const usersPath = path.join(__dirname, `../data/${fileName}`);
   let parseResult;
   let fileContents;
+
   try {
     fileContents = fs.readFileSync(usersPath, { encoding: 'utf8' });
   } catch (e) {
@@ -16,5 +17,10 @@ module.exports.parse = (fileName) => {
   } catch (e) {
     return { error: 'Неверный формат файла' };
   }
+
+  if (!Array.isArray(parseResult)) {
+    return { error: 'Не верный формат файла' };
+  }
+
   return parseResult;
 };

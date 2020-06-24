@@ -5,31 +5,26 @@ const users = parser.parse('users.json');
 
 usersRouter.get('/', (req, res) => {
   if (users.error) {
-    res.status(500).send(users);
-    return;
+    return res.status(500).send(users);
   }
-  res.send(users);
+  return res.send(users);
 });
 
 usersRouter.get('/:id', (req, res) => {
   const { id } = req.params;
 
   if (users.error) {
-    res.status(500).send(users);
-    return;
+    return res.status(500).send(users);
   }
-  if (!Array.isArray(users)) {
-    res.status(500).send({ message: 'Не верный формат файла' });
-  }
+
   const user = users.find((el) => el._id === id);
 
   if (user) {
     console.log(`Пользователь с таким ID: ${id} = ${user._id}`);
-    res.send(user);
-    return;
+    return res.send(user);
   }
 
-  res.status(404).send({ message: 'Нет пользователя с таким id' });
+  return res.status(404).send({ message: 'Нет пользователя с таким id' });
 });
 
 module.exports = usersRouter;
