@@ -1,21 +1,35 @@
 const usersRouter = require('express').Router();
-const {users} = require('../modules/usersParse');
+const parser = require('../modules/parser');
 
-usersRouter.get('/users', (req, res) => {
+const users = parser.parse('users.json');
+
+usersRouter.get('/', (req, res) => {
+  if (users.error) {
+    res.status(500).send(users);
+    return;
+  }
   res.send(users);
 });
 
-usersRouter.get('/users/:id', (req, res) => {
-  const {id} = req.params;
+usersRouter.get('/:id', (req, res) => {
+  const { id } = req.params;
 
-  for (let item of users) {
-    if (id === item._id) {
-      console.log(`Пользователь с таким ID: ${id} = ${item['_id']}`);
-      res.send(item);
-      return;
-    }
+  if (users.error) {
+    res.status(500).send(users);
+    return;
   }
-  res.status(404).send({"message": "Нет пользователя с таким id"});
+  if (!Array.isArray(users)) {
+    res.status(500).send({ message: 'Не верный формат файла' });
+  }
+  const user = users.find((el) => el._id === id);
+
+  if (user) {
+    console.log(`Пользователь с таким ID: ${id} = ${user._id}`);
+    res.send(user);
+    return;
+  }
+
+  res.status(404).send({ message: 'Нет пользователя с таким id' });
 });
 
 module.exports = usersRouter;

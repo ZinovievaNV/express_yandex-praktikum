@@ -1,7 +1,9 @@
 const cardsRouter = require('express').Router();
-const {cards} = require('../modules/cardsParse');
+const parser = require('../modules/parser');
 
-cardsRouter.get('/cards', (req, res) => {
+const cards = parser.parse('cards.json');
+
+cardsRouter.get('/', (req, res) => {
   res.send(cards);
 });
 module.exports = cardsRouter;
