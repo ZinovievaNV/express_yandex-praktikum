@@ -16,11 +16,11 @@ usersRouter.get('/:id', (req, res) => {
   if (users.error) {
     return res.status(500).send(users);
   }
-
+  // eslint-disable-next-line no-underscore-dangle
   const user = users.find((el) => el._id === id);
 
   if (user) {
-    console.log(`Пользователь с таким ID: ${id} = ${user._id}`);
+    // console.log(`Пользователь с таким ID: ${id} = ${user._id}`);
     return res.send(user);
   }
 
