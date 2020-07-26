@@ -1,0 +1,29 @@
+{
+  "name": "sprint12_yandex-praktikum",
+  "version": "0.0.1",
+  "description": "Серверная разработка на Node.js.Приложение на Express.js",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZinovievaNV/express_yandex-praktikum.git"
+  },
+  "author": "Zinovieva Natalya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZinovievaNV/express_yandex-praktikum/issues"
+  },
+  "homepage": "https://github.com/ZinovievaNV/express_yandex-praktikum#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "nodemon": "^2.0.4"
+  }
+}
